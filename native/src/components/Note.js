@@ -24,7 +24,7 @@ class Note extends React.Component {
   async componentDidMount() {
     this.sound = await this.loadSound();
   }
-  async static getDerivedStateFromProps(nextProps, prevState) {
+  async getDerivedStateFromProps(nextProps, prevState) {
     if (
       (prevState.instrumentName !== nextProps.instrumentName) ||
       (prevState.name !== nextProps.name) 
