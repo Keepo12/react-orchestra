@@ -98,6 +98,6 @@ Note.defaultProps = {
   onStartPlayingNote: () => {},
   onStopPlayingNote: () => {},
   onNoteLoaded: () => {},
-  delayPressOut: 10,
+  delayPressOut: 1000,
 };
 export default Note;
