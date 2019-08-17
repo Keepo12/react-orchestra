@@ -74,8 +74,8 @@ class Note extends React.Component {
     }
     return (
       <TouchableWithoutFeedback
-        onPressIn={this.startPlayingNote}
-        onPressOut={this.stopPlayingNote}
+        onPress={this.startPlayingNote}
+        //onPressOut={this.stopPlayingNote}
         delayPressOut={this.props.delayPressOut}
         className={
           `${isDefined(this.props.className, '')} ${classnames({
