@@ -142,7 +142,7 @@ MidiTrack.propTypes = {
       instrumentName: PropTypes.string,
       deltaTime: PropTypes.number,
       msPerTick: PropTypes.number,
-      style: ViewPropTypes.style,
+      style: ViewPropTypes ? ViewPropTypes.style : View.propTypes.style,
     },
   )),
 };
