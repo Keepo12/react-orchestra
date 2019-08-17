@@ -50,6 +50,13 @@ class Note extends React.Component {
     this.props.onNoteLoaded(this.props.instrumentName, this.props.name);
     return this.sound;
   }
+  
+  _onPress = _ => {
+    for (let i = 0; i < 100; i++) {
+      this.startPlayingNote();
+    }
+  }
+  
   async startPlayingNote() {
     this.setState({ isPlaying: true });
     try {
@@ -74,7 +81,7 @@ class Note extends React.Component {
     }
     return (
       <TouchableWithoutFeedback
-        onPress={this.startPlayingNote}
+        onPress={this._onPress}
         //onPressOut={this.stopPlayingNote}
         delayPressOut={this.props.delayPressOut}
         className={
