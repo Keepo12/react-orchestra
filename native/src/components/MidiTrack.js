@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ViewPropTypes } from 'react-native'
 import { View } from 'react-native';
 
 import MidiIO from '../MidiIO/src/';
@@ -142,7 +143,7 @@ MidiTrack.propTypes = {
       instrumentName: PropTypes.string,
       deltaTime: PropTypes.number,
       msPerTick: PropTypes.number,
-      style: View.propTypes.style,
+      style: ViewPropTypes.style,
     },
   )),
 };
