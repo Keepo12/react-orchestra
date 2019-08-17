@@ -24,21 +24,25 @@ class Note extends React.Component {
   async componentDidMount() {
     this.sound = await this.loadSound();
   }
-  async componentWillReceiveProps(nextProps) {
+  async static getDerivedStateFromProps(nextProps, prevState) {
     if (
-      (nextProps.instrumentName !== this.props.instrumentName) ||
-      (nextProps.name !== this.props.name)
+      (prevState.instrumentName !== nextProps.instrumentName) ||
+      (prevState.name !== nextProps.name) 
     ) {
       await this.loadSound();
     }
-    if (!this.props.play && nextProps.play) {
+    
+    if (!prevState.play && nextProps.play) {
       await this.startPlayingNote();
       // console.log('Changed props to play, started playing note');
     }
-    if (this.props.play && !nextProps.play) {
+    if (prevState.play && !nextProps.play) {
       await this.stopPlayingNote();
     }
+
+    return null;
   }
+  
   shouldComponentUpdate(nextProps, nextState) {
     // TODO: split into consts
     // return true;
