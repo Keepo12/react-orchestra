@@ -9,7 +9,7 @@ import {
 
 import isDefined from '../utils/isDefined';
 
-class Note extends React.Component {
+class Note extends React.PureComponent {
   constructor(props) {
     super(props);
     this.playingBuffers = [];
@@ -24,7 +24,21 @@ class Note extends React.Component {
   async componentDidMount() {
     this.sound = await this.loadSound();
   }
-  
+  async componentWillReceiveProps(nextProps) {
+    if (
+      (nextProps.instrumentName !== this.props.instrumentName) ||
+      (nextProps.name !== this.props.name)
+    ) {
+      await this.loadSound();
+    }
+    if (!this.props.play && nextProps.play) {
+      await this.startPlayingNote();
+      // console.log('Changed props to play, started playing note');
+    }
+    if (this.props.play && !nextProps.play) {
+      await this.stopPlayingNote();
+    }
+  }
   shouldComponentUpdate(nextProps, nextState) {
     // TODO: split into consts
     // return true;
@@ -50,7 +64,6 @@ class Note extends React.Component {
     this.props.onNoteLoaded(this.props.instrumentName, this.props.name);
     return this.sound;
   }
-  
   async startPlayingNote() {
     this.setState({ isPlaying: true });
     try {
@@ -99,6 +112,6 @@ Note.defaultProps = {
   onStartPlayingNote: () => {},
   onStopPlayingNote: () => {},
   onNoteLoaded: () => {},
-  delayPressOut: 1000,
+  delayPressOut: 1500,
 };
 export default Note;
